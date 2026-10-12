@@ -14,16 +14,31 @@ def write_input(root, frame):
     frame.to_csv(directory / "census.csv", index=False)
 
 
+def spy_on_split(monkeypatch):
+    """Record the train/test split that main() actually uses."""
+    captured = {}
+    original = training.train_test_split
+
+    def spy(*args, **kwargs):
+        train, test = original(*args, **kwargs)
+        captured["train"], captured["test"] = train, test
+        return train, test
+
+    monkeypatch.setattr(training, "train_test_split", spy)
+    return captured
+
+
 def test_complete_training_pipeline(census_frame, tmp_path, monkeypatch, capsys):
     write_input(tmp_path, census_frame)
     monkeypatch.setattr(training, "ROOT", tmp_path)
+    split = spy_on_split(monkeypatch)
     training.main()
     report = json.loads((tmp_path / "metrics.json").read_text())
     assert report["total_rows"] == 40
     assert report["train_rows"] == 32 and report["test_rows"] == 8
     assert report["positive_class"] == ">50K"
-    data = training.load_clean_data()
-    _, test = training.train_test_split(data, test_size=0.20)
+    test = split["test"]
+    assert len(test) == report["test_rows"]
     model, encoder, lb = load_model(tmp_path / "model")
     X, y, _, _ = process_data(test, training.CAT_FEATURES, "salary", False, encoder, lb)
     expected = compute_model_metrics(y, inference(model, X))
