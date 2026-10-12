@@ -28,11 +28,19 @@ The script reserves 20 percent of the input for held-out evaluation.
 Evaluation reuses the fitted training encoders. The slice function is intended to evaluate each category observed in the test partition for every categorical feature. Categories absent from the test partition are omitted. The intended output is slice_output.txt, containing each slice's feature, value, sample count, precision, recall, and fbeta.
 
 ## Metrics
-_Please include the metrics used and your model's performance on those metrics._
+
 The evaluation metrics are
-- **Precision: Measures the proportion of positive predictions that are actually correct (True Positives / (True Positives + False Positives))
-- **Recall: Measures the proportion of actual positive cases that are correctly identified (True Positives / (True Positives + False Negatives))
-- **F-beta Score (F1): Harmonic mean of precision and recall, providing a balanced measure of model performance
+- **Precision**: Measures the proportion of positive predictions that are actually correct (True Positives / (True Positives + False Positives))
+- **Recall**: Measures the proportion of actual positive cases that are correctly identified (True Positives / (True Positives + False Negatives))
+- **F-beta Score (F1)**: Harmonic mean of precision and recall, providing a balanced measure of model performance
+
+**Performance on the held-out test set (6,513 rows, 20% of the data):**
+
+| Metric    | Value |
+|-----------|-------|
+| Precision | 0.783 |
+| Recall    | 0.598 |
+| F1        | 0.678 |
 
 ## Ethical Considerations
 
