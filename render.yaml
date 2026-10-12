@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: census-income-api
+    runtime: python
+    plan: free
+    region: frankfurt
+    branch: main
+    buildCommand: pip install -r requirements.txt && python -m starter.train_model
+    startCommand: uvicorn main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /
+    # Render never deploys on its own; GitHub Actions triggers the deploy
+    # hook only after flake8 + pytest pass on main.
+    autoDeployTrigger: "off"
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.13.5
