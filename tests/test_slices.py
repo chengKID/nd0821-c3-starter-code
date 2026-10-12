@@ -1,9 +1,5 @@
 """Metric correctness, and output tests."""
-import pytest
-
-from starter.ml.data import process_data
-from starter.ml.model import compute_model_metrics, inference
-from starter.ml.slices import compute_slice_metrics, write_slice_output
+from starter.ml.slices import compute_slice_metrics
 from starter.train_model import CAT_FEATURES
 
 

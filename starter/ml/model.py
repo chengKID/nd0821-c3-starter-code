@@ -1,7 +1,7 @@
 from pathlib import Path
 
 import joblib
-import numpy as np
+
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import fbeta_score, precision_score, recall_score
 
@@ -21,11 +21,12 @@ def train_model(X_train, y_train):
     model : RandomForestClassifier
         Trained machine learning model.
     """
-    model = RandomForestClassifier(n_estimators=200, 
-                                   min_samples_leaf=2,
-                                   random_state=42, 
-                                   max_depth=None,
-                                   n_jobs=-1,
+    model = RandomForestClassifier(
+        n_estimators=200,
+        min_samples_leaf=2,
+        random_state=42,
+        max_depth=None,
+        n_jobs=-1,
     )
     model.fit(X_train, y_train)
     return model

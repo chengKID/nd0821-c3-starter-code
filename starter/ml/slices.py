@@ -5,12 +5,13 @@ from starter.ml.model import compute_model_metrics, inference
 from starter.ml.data import process_data
 
 
-def compute_slice_metrics(model,
-                          test_data,
-                          cat_features,
-                          label,
-                          encoder,
-                          lb,
+def compute_slice_metrics(
+    model,
+    test_data,
+    cat_features,
+    label,
+    encoder,
+    lb,
 ):
     """Evaluate every requested category; empty slices have unavailable metrics."""
     slice_metrics = []

@@ -1,7 +1,5 @@
 """Tests for metrics, inference, and artifact persistence."""
 import numpy as np
-import pytest
-from sklearn.ensemble import RandomForestClassifier
 
 from starter.ml.model import compute_model_metrics, inference, load_model, save_model
 

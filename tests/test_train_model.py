@@ -8,6 +8,12 @@ from starter.ml.data import process_data
 from starter.ml.model import compute_model_metrics, inference, load_model
 
 
+def write_input(root, frame):
+    directory = root / "data"
+    directory.mkdir()
+    frame.to_csv(directory / "census.csv", index=False)
+
+
 def test_complete_training_pipeline(census_frame, tmp_path, monkeypatch, capsys):
     write_input(tmp_path, census_frame)
     monkeypatch.setattr(training, "ROOT", tmp_path)

@@ -50,7 +50,7 @@ def main():
         training=True,
     )
     X_test, y_test, _, _ = process_data(
-        test, 
+        test,
         categorical_features=CAT_FEATURES,
         label="salary",
         training=False,
@@ -87,6 +87,7 @@ def main():
         test_fraction=len(test) / len(data),
     )
     (ROOT / "metrics.json").write_text(json.dumps(report, indent=2) + "\n", encoding="utf-8")
+
 
 if __name__ == "__main__":
     main()
