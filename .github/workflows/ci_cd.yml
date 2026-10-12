@@ -49,7 +49,7 @@ jobs:
     name: deploy (Render)
     needs: test
     if: github.event_name == 'push' && (github.ref == 'refs/heads/main' || github.ref == 'refs/heads/master')
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     environment: production
     steps:
       - name: Trigger Render deploy of the tested commit
