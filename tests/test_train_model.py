@@ -23,8 +23,8 @@ def test_complete_training_pipeline(census_frame, tmp_path, monkeypatch, capsys)
     assert report["train_rows"] == 32 and report["test_rows"] == 8
     assert report["positive_class"] == ">50K"
     data = training.load_clean_data()
-    _, test = training.train_test_split(data, test_size=0.20, random_state=42, stratify=data["salary"])
-    model, encoder, lb = load_model(tmp_path)
+    _, test = training.train_test_split(data, test_size=0.20)
+    model, encoder, lb = load_model(tmp_path / "model")
     X, y, _, _ = process_data(test, training.CAT_FEATURES, "salary", False, encoder, lb)
     expected = compute_model_metrics(y, inference(model, X))
     np.testing.assert_allclose(expected, [report[k] for k in ("precision", "recall", "fbeta")])

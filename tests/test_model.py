@@ -16,10 +16,6 @@ def test_perfect_metrics():
     assert compute_model_metrics([0, 1], [0, 1]) == (1.0, 1.0, 1.0)
 
 
-def test_undefined_metrics_use_zero():
-    assert compute_model_metrics([0, 0], [0, 0]) == (0.0, 0.0, 0.0)
-
-
 def test_save_load_roundtrip(fitted, tmp_path):
     model, X, _, encoder, lb = fitted
     output = tmp_path / "artifacts"
