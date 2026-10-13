@@ -6,7 +6,7 @@ from urllib.parse import urlparse
 import requests
 
 # Replace with your Render URL, or set API_URL in the environment.
-API_URL = os.environ.get("API_URL", "https://census-income-api.onrender.com")
+API_URL = os.environ.get("API_URL", "https://census-income-api-enib.onrender.com")
 
 SAMPLE = {
     "age": 52,
